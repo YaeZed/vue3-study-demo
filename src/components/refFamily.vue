@@ -22,8 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { any } from "0g";
-import { ref, isRef, shallowRef, triggerRef, customRef } from "vue";
+import { ref, shallowRef, triggerRef, customRef } from "vue";
 
 let message = ref<string | number>("Loading...");
 
@@ -45,7 +44,7 @@ const changeObj = () => {
   // 3.1 ref和shalloRef不能同时用，因为ref会更新页面，导致页面重新渲染，从而会影响shallowRef也更新
   //   message.value = "ref修改了";
   // 4.triggerRef()方法可以强制更新模板
-  triggerRef(obj);
+  // triggerRef(obj);
 };
 
 // 5.customRef()方法可以自定义一个ref，可以实现响应式的功能
