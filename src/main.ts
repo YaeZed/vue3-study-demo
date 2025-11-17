@@ -1,4 +1,14 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 
-createApp(App).mount('#app')
+// 全局组件定义
+import baseButton from './components/baseButton.vue'
+
+const app = createApp(App)
+
+// 全局组件注册
+// app.component('组件名', 组件对象)
+// 注册后，在任何其他组件中都可以直接使用 <BaseButton>，无需导入。
+app.component('base-button', baseButton)
+
+app.mount('#app')
