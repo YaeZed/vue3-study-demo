@@ -44,13 +44,11 @@
   <component :is="currentComponent" :message="currentMessage"></component> -->
 
   <!-- 插槽 -->
-  <slotBasic>
-    <!-- 默认插槽 -->
+  <!-- <slotBasic>
     <p>这是父组件</p>
     <img src="./assets/macllen.PNG" alt="macllen" style="width: 100px" />
 
-    <!-- 具名插槽 -->
-    <!-- 使用 <template> 标签和 v-slot 指令（或其简写 #）来指定要填充的插槽。 -->
+    
     <template #header>
       <h2>这是一个模态框标题</h2>
     </template>
@@ -64,17 +62,26 @@
       <button>确认</button>
     </template>
 
-    <!-- 作用域插槽 -->
-    <!--父组件通过 v-slot (或 #) 解构子组件传递的数据，并且可以立即为这些数据添加 TypeScript 类型。  -->
+    
     <template #user-item="{ user, isAdmin }: { user: User, isAdmin: boolean }">
       <span> {{ user.name }}-{{ user.age }}岁 </span>
       <span v-if="isAdmin" style="color: red; margin-left: 10px">[管理员]</span>
     </template>
-  </slotBasic>
+  </slotBasic> -->
+
+  <!-- 异步组件 -->
+  <Suspense>
+    <template #default>
+      <AsyncUserCard />
+    </template>
+    <template #fallback>
+      <skeleton />
+    </template>
+  </Suspense>
 </template>
 
 <script setup lang="ts">
-import { ref, type Component, markRaw, shallowRef } from "vue";
+import { ref, type Component, markRaw, shallowRef, Suspense } from "vue";
 import commandBasic from "./components/commandBasic.vue";
 import refFamily from "./components/refFamily.vue";
 import reactiveFamily from "./components/reactiveFamily.vue";
@@ -91,6 +98,7 @@ import slotBasic from "./components/slotBasic.vue";
 import A from "./components/dynamics/A.vue";
 import B from "./components/dynamics/B.vue";
 import C from "./components/dynamics/C.vue";
+
 const display = ref(true);
 
 /**
@@ -192,6 +200,35 @@ interface User {
   name: string;
   age: number;
 }
+
+// 异步组件
+import { defineAsyncComponent } from "vue";
+/**
+ * 1.同步导入骨架屏
+ * "fallback内容是同步的，可以立即渲染"
+ */
+import skeleton from "./components/skeleton.vue";
+
+/**
+ * 2.异步导入真实组件
+ * 使用 `defineAsyncComponent` 来“包装”。
+ * 这告诉 Vue 这是一个异步组件，应该懒加载。
+ */
+// ----------------------------------------------------
+// 💡 (可选) 如何在本地测试骨架屏:
+//
+// 在本地开发中，`card.vue` 加载得太快，你可能
+// 看不到骨架屏。你可以像这样模拟一个 2 秒的网络延迟：
+//
+const AsyncUserCard = defineAsyncComponent(() => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      // @ts-ignore
+      resolve(import("./components/card.vue"));
+    }, 1500); // 延迟 1.5 秒
+  });
+});
+// ----------------------------------------------------
 </script>
 
 <style scoped>
