@@ -70,14 +70,37 @@
   </slotBasic> -->
 
   <!-- 异步组件 -->
-  <Suspense>
+  <!-- <Suspense>
     <template #default>
       <AsyncUserCard />
     </template>
     <template #fallback>
       <skeleton />
     </template>
-  </Suspense>
+  </Suspense> -->
+
+  <!-- 传送组件模态框 -->
+  <!-- <div class="parent-container">
+    <h1>父组件页面</h1>
+    <p>即使这里的父级设置了 overflow: hidden，Modal 依然会全屏显示。</p>
+
+    <button @click="showModal = true">打开模态框</button>
+
+    <teleModal
+      v-model:isOpen="showModal"
+      title="用户协议"
+      @confirm="handleConfirm"
+    >
+      <p>这里是模态框的具体内容...</p>
+      <p>这是一个 TypeScript 编写的 Teleport 示例。</p>
+    </teleModal>
+  </div> -->
+  <!-- keep-alive -->
+  <el-button type="primary" @click="display = !display">切换组件</el-button>
+  <KeepAlive :include="['eleA']" :exclude="['eleB']" :max="10">
+    <eleA v-if="display"></eleA>
+    <eleB v-else></eleB>
+  </KeepAlive>
 </template>
 
 <script setup lang="ts">
@@ -93,6 +116,11 @@ import props_emits from "./components/props_emits.vue";
 import treeNode from "./components/treeNode.vue";
 // 插槽
 import slotBasic from "./components/slotBasic.vue";
+// 模态框
+import teleModal from "./components/teleModal.vue";
+// keep-alive
+import eleA from "./components/elementPlus/eleA.vue";
+import eleB from "./components/elementPlus/eleB.vue";
 
 // 动态组件
 import A from "./components/dynamics/A.vue";
@@ -229,6 +257,12 @@ const AsyncUserCard = defineAsyncComponent(() => {
   });
 });
 // ----------------------------------------------------
+
+// 传送组件
+const showModal = ref(true);
+const handleConfirm = () => {
+  console.log("confirm");
+};
 </script>
 
 <style scoped>
@@ -245,5 +279,13 @@ button {
   padding: 20px 20px;
   margin: 10px 10px;
   font-size: 20px;
+}
+.parent-container {
+  /* 模拟一个受限的布局环境 */
+  transform: translateZ(0);
+  overflow: hidden;
+  height: 200px;
+  border: 1px solid #ccc;
+  padding: 20px;
 }
 </style>
