@@ -96,11 +96,13 @@
     </teleModal>
   </div> -->
   <!-- keep-alive -->
-  <el-button type="primary" @click="display = !display">切换组件</el-button>
+  <!-- <el-button type="primary" @click="display = !display">切换组件</el-button>
   <KeepAlive :include="['eleA']" :exclude="['eleB']" :max="10">
     <eleA v-if="display"></eleA>
     <eleB v-else></eleB>
-  </KeepAlive>
+  </KeepAlive> -->
+  <!-- 动画组件 -->
+  <transitionEl></transitionEl>
 </template>
 
 <script setup lang="ts">
@@ -127,6 +129,8 @@ import A from "./components/dynamics/A.vue";
 import B from "./components/dynamics/B.vue";
 import C from "./components/dynamics/C.vue";
 
+// 动画组件
+import transitionEl from "./components/transitionEl.vue";
 const display = ref(true);
 
 /**
