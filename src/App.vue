@@ -2,7 +2,7 @@
   <!-- <commandBasic></commandBasic> -->
   <!-- <refFamily></refFamily> -->
   <!-- <reactiveFamily></reactiveFamily> -->
-  <!-- <toFamily></toFamily> -->
+  <toFamily></toFamily>
   <!-- <computed></computed> -->
   <!-- <watchBasic></watchBasic> -->
 
@@ -102,11 +102,25 @@
     <eleB v-else></eleB>
   </KeepAlive> -->
   <!-- 动画组件 -->
-  <transitionEl></transitionEl>
+  <!-- <transitionEl></transitionEl> -->
+  <!-- provide/inject -->
+  <!-- <div class="div">
+    <h1>父组件:{{ userInfo.name }}</h1>
+    <injectChild></injectChild>
+  </div> -->
 </template>
 
 <script setup lang="ts">
-import { ref, type Component, markRaw, shallowRef, Suspense } from "vue";
+import {
+  ref,
+  provide,
+  type Component,
+  markRaw,
+  shallowRef,
+  Suspense,
+} from "vue";
+// 引入定义的Key
+import { UserKey, UpdateUserKey, type UserInfo } from "./components/ts/symbol";
 import commandBasic from "./components/commandBasic.vue";
 import refFamily from "./components/refFamily.vue";
 import reactiveFamily from "./components/reactiveFamily.vue";
@@ -132,6 +146,9 @@ import C from "./components/dynamics/C.vue";
 // 动画组件
 import transitionEl from "./components/transitionEl.vue";
 const display = ref(true);
+
+// inject子组件
+import injectChild from "./components/injectChild.vue";
 
 /**
  * 父子组件传参
@@ -267,6 +284,22 @@ const showModal = ref(true);
 const handleConfirm = () => {
   console.log("confirm");
 };
+
+// provide/inject
+// 定义响应式数据
+const userInfo = ref<UserInfo>({
+  id: 1,
+  name: "YaeZed",
+});
+// 定义修改数据的方法
+const updateName = (newName: string) => {
+  userInfo.value.name = newName;
+};
+
+// 使用定义好的 Key 进行 provide
+// TS 会自动检查提供的值是否符合 InjectionKey 定义的类型
+provide(UserKey, userInfo);
+provide(UpdateUserKey, updateName);
 </script>
 
 <style scoped>

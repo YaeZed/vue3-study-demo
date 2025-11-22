@@ -2,12 +2,11 @@
   <div>
     <h3>toRefs</h3>
     <p>姓名: {{ name }}</p>
-    <!-- <p>年龄: {{ age }}</p> -->
+    <p>年龄: {{ age }}</p>
 
     <input v-model="user.name" />
   </div>
 </template>
-user
 
 <script setup lang="ts">
 import { reactive, toRefs, toRef, toRaw } from "vue";
@@ -30,14 +29,14 @@ const user = reactive<User>({
 // const { name, age } = user;
 
 // 使用 toRefs 解构，将所有属性转换为ref
-// const { name, age } = toRefs(user);
+const { name, age } = toRefs(user);
 
 /**
  * 2.toRef
  * toRef 的作用是将一个响应式对象中的某个属性转换为 ref 对象。
  * toRef 不常用于“美化”模板，它主要用于在 <script setup> 逻辑中传递响应性。
  */
-const name = toRef(user, "name");
+// const name = toRef(user, "name");
 
 /**
  * 3.toRaw
