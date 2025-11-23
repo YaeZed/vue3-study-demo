@@ -2,7 +2,7 @@
   <!-- <commandBasic></commandBasic> -->
   <!-- <refFamily></refFamily> -->
   <!-- <reactiveFamily></reactiveFamily> -->
-  <toFamily></toFamily>
+  <!-- <toFamily></toFamily> -->
   <!-- <computed></computed> -->
   <!-- <watchBasic></watchBasic> -->
 
@@ -108,6 +108,17 @@
     <h1>父组件:{{ userInfo.name }}</h1>
     <injectChild></injectChild>
   </div> -->
+
+  <!-- mitt兄弟组件传值 -->
+  <!-- <mitt></mitt>
+  <div class="receiver">
+    <h3>我是组件B（接收方）</h3>
+    <p>
+      接收到的数据:{{
+        userInfo1?.username ? userInfo1.username : "等待数据..."
+      }}
+    </p>
+  </div> -->
 </template>
 
 <script setup lang="ts">
@@ -118,6 +129,8 @@ import {
   markRaw,
   shallowRef,
   Suspense,
+  onMounted,
+  onUnmounted,
 } from "vue";
 // 引入定义的Key
 import { UserKey, UpdateUserKey, type UserInfo } from "./components/ts/symbol";
@@ -150,6 +163,8 @@ const display = ref(true);
 // inject子组件
 import injectChild from "./components/injectChild.vue";
 
+// mitt兄弟组件
+import mitt from "./components/mitt.vue";
 /**
  * 父子组件传参
  */
@@ -300,8 +315,29 @@ const updateName = (newName: string) => {
 // TS 会自动检查提供的值是否符合 InjectionKey 定义的类型
 provide(UserKey, userInfo);
 provide(UpdateUserKey, updateName);
+
+// mitt兄弟组件传值
+import bus from "./components/ts/mittBus";
+
+// 定义接收数据的响应式变量
+const userInfo1 = ref<{ username: string; token: string } | null>(null);
+// 定义回调函数
+const onUserLogin = (data: { username: string; token: string }) => {
+  console.log("组件B收到数据", data);
+
+  userInfo1.value = data;
+};
+//监听mitt事件
+onMounted(() => {
+  bus.on("user-login", onUserLogin);
+});
+// 组件销毁时移除监听
+onUnmounted(() => {
+  bus.off("user-login", onUserLogin);
+});
 </script>
 
+//
 <style scoped>
 .parent-container {
   border: 2px solid #34495e;
