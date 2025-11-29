@@ -121,7 +121,7 @@
   </div> -->
 
   <!-- v-model -->
-  <vModel
+  <!-- <vModel
     v-model="parentMsg"
     v-model:visiable="isVisiable"
     v-model:title="title"
@@ -130,7 +130,10 @@
   <p>
     父组件当前值：<strong>{{ myPromoCode }}</strong>
   </p>
-  <p>父组件收到:{{ parentMsg }}</p>
+  <p>父组件收到:{{ parentMsg }}</p> -->
+
+  <!-- 自定义指令 -->
+  <directives></directives>
 </template>
 
 <script setup lang="ts">
@@ -177,6 +180,9 @@ import injectChild from "./components/injectChild.vue";
 
 // mitt兄弟组件
 import mitt from "./components/mitt.vue";
+
+// 自定义指令
+import directives from "./components/directives.vue";
 /**
  * 父子组件传参
  */
