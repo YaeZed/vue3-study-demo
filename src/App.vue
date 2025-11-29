@@ -119,6 +119,18 @@
       }}
     </p>
   </div> -->
+
+  <!-- v-model -->
+  <vModel
+    v-model="parentMsg"
+    v-model:visiable="isVisiable"
+    v-model:title="title"
+    v-model:code.clean.upper="myPromoCode"
+  ></vModel>
+  <p>
+    父组件当前值：<strong>{{ myPromoCode }}</strong>
+  </p>
+  <p>父组件收到:{{ parentMsg }}</p>
 </template>
 
 <script setup lang="ts">
@@ -281,8 +293,7 @@ import skeleton from "./components/skeleton.vue";
 // ----------------------------------------------------
 // 💡 (可选) 如何在本地测试骨架屏:
 //
-// 在本地开发中，`card.vue` 加载得太快，你可能
-// 看不到骨架屏。你可以像这样模拟一个 2 秒的网络延迟：
+// 在本地开发中，`card.vue` 加载得太快，可能看不到骨架屏。像这样模拟一个 2 秒的网络延迟：
 //
 const AsyncUserCard = defineAsyncComponent(() => {
   return new Promise((resolve) => {
@@ -335,9 +346,17 @@ onMounted(() => {
 onUnmounted(() => {
   bus.off("user-login", onUserLogin);
 });
+
+// v-model
+import vModel from "./components/vModel.vue";
+const parentMsg = ref("父组件的消息");
+
+const isVisiable = ref(true);
+const title = ref("pageTitle");
+
+const myPromoCode = ref("");
 </script>
 
-//
 <style scoped>
 .parent-container {
   border: 2px solid #34495e;
