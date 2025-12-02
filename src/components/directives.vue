@@ -52,11 +52,13 @@ const closeModal = () => {
   isShow.value = false;
 };
 
+// Record:它的核心作用是：快速定义一个对象，规定它的“键（Key）”是什么类型，“值（Value）”是什么类型。
 const images: Record<string, { default: string }> = import.meta.glob(
   "../assets/images/*.*",
   { eager: true }
 );
 
+// 数据提取p
 let arr = Object.values(images).map((item) => item.default);
 </script>
 
