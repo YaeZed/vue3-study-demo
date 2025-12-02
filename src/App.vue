@@ -133,7 +133,15 @@
   <p>父组件收到:{{ parentMsg }}</p> -->
 
   <!-- 自定义指令 -->
-  <directives></directives>
+  <!-- <directives></directives> -->
+
+  <!-- 自定义hooks -->
+  <!-- <hooks></hooks> -->
+
+  <!-- 样式穿透 -->
+  <deep>
+    <p class="slot-class">插槽内容</p>
+  </deep>
 </template>
 
 <script setup lang="ts">
@@ -154,7 +162,7 @@ import refFamily from "./components/refFamily.vue";
 import reactiveFamily from "./components/reactiveFamily.vue";
 import toFamily from "./components/toFamily.vue";
 import computed from "./components/computed.vue";
-// import watchBasic from "./components/watchBasic.vue";
+import watchBasic from "./components/watchBasic.vue";
 import lifeCircle from "./components/lifeCircle.vue";
 import props_emits from "./components/props_emits.vue";
 import treeNode from "./components/treeNode.vue";
@@ -183,6 +191,12 @@ import mitt from "./components/mitt.vue";
 
 // 自定义指令
 import directives from "./components/directives.vue";
+
+// hooks
+import hooks from "./components/hooks.vue";
+
+// 样式穿透
+import deep from "./components/deep.vue";
 /**
  * 父子组件传参
  */

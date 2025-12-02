@@ -38,7 +38,6 @@
  * watch (侦听器) 是 Vue 组合式 API (Composition API) 中的一个核心功能。它允许你响应式地执行副作用 (side effects)。
  * 它可以监听数据的变化，并在数据变化时执行回调函数。
  */
-import { clear } from "console";
 import { ref, watch, reactive, watchEffect } from "vue";
 /**
  * 1.监听一个ref变量
