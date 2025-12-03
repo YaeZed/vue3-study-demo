@@ -48,7 +48,6 @@
     <p>这是父组件</p>
     <img src="./assets/macllen.PNG" alt="macllen" style="width: 100px" />
 
-    
     <template #header>
       <h2>这是一个模态框标题</h2>
     </template>
@@ -62,7 +61,6 @@
       <button>确认</button>
     </template>
 
-    
     <template #user-item="{ user, isAdmin }: { user: User, isAdmin: boolean }">
       <span> {{ user.name }}-{{ user.age }}岁 </span>
       <span v-if="isAdmin" style="color: red; margin-left: 10px">[管理员]</span>
@@ -139,9 +137,12 @@
   <!-- <hooks></hooks> -->
 
   <!-- 样式穿透 -->
-  <deep>
+  <!-- <deep>
     <p class="slot-class">插槽内容</p>
-  </deep>
+  </deep> -->
+
+  <!-- nextTick -->
+  <!-- <nextTick></nextTick> -->
 </template>
 
 <script setup lang="ts">
@@ -197,6 +198,9 @@ import hooks from "./components/hooks.vue";
 
 // 样式穿透
 import deep from "./components/deep.vue";
+
+// nextTick
+import nextTick from "./components/nextTick.vue";
 /**
  * 父子组件传参
  */

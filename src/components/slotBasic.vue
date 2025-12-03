@@ -24,12 +24,13 @@
     <h3>作用域插槽</h3>
     <p>用户列表：</p>
     <ul>
-      <li v-for="user in users" :key="user.id">
+      <li v-for="(user, index) in users" :key="user.id">
+        {{ index }}
         <!-- 子组件通过在 <slot> 标签上绑定属性，来将数据"暴露"给父组件。 -->
         <slot
+          name="user-item"
           :user="user"
           :isAdmin="user.name === 'YaeZed'"
-          name="user-item"
         ></slot>
       </li>
     </ul>
