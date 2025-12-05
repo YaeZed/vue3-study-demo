@@ -143,6 +143,12 @@
 
   <!-- nextTick -->
   <!-- <nextTick></nextTick> -->
+
+  <!-- pinia购物车 -->
+  <!-- <cart></cart> -->
+
+  <!-- 路由 -->
+  <router></router>
 </template>
 
 <script setup lang="ts">
@@ -201,6 +207,12 @@ import deep from "./components/deep.vue";
 
 // nextTick
 import nextTick from "./components/nextTick.vue";
+
+// pinia购物车
+import cart from "./components/cart.vue";
+
+// 路由
+import router from "./components/router.vue";
 /**
  * 父子组件传参
  */
