@@ -146,9 +146,10 @@
 
   <!-- pinia购物车 -->
   <!-- <cart></cart> -->
+  <router-view></router-view>
 
   <!-- 路由 -->
-  <router></router>
+  <!-- <router></router> -->
 </template>
 
 <script setup lang="ts">
