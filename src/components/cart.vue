@@ -5,7 +5,15 @@
       <ul>
         <li v-for="item in products" :key="item.id" class="item">
           <span>{{ item.name }} - ${{ item.price }}</span>
-          <button @click="addToCart(item)">+</button>
+          <div class="btn-actions">
+            <button
+              style="margin-right: 10px"
+              @click="detail(item.id, item.name)"
+            >
+              详情
+            </button>
+            <button @click="addToCart(item)">+</button>
+          </div>
         </li>
       </ul>
     </div>
@@ -52,7 +60,9 @@ import { storeToRefs } from "pinia";
 import { useCartStore } from "../stores/cart";
 import AnimatedNumber from "./AnimatedNumber.vue";
 import SliderNumber from "./SliderNumber.vue";
-
+import { useRouter } from "vue-router";
+// 实例化router
+const router = useRouter();
 // 实例化store
 const cartStore = useCartStore();
 
@@ -68,6 +78,20 @@ const handleDlete = (item: any) => {
   if (item.quantity <= 0) {
     removeFromCart(item.id);
   }
+};
+
+// 跳转到详情页面
+const detail = (id: number, name: string) => {
+  router.push({
+    name: "detail",
+    params: {
+      id: id,
+    },
+    query: {
+      source: "recomment_list",
+      productName: name,
+    },
+  });
 };
 </script>
 

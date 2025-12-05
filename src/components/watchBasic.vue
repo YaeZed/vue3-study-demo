@@ -185,7 +185,7 @@ watchEffect((onInvalidate) => {
       }
     });
 
-  // 4. 注册“失效”回调
+  // 4. 注册“失效”的回调函数
   // 当 query 再次变化，watchEffect 即将重新运行时，
   // *上一次* 注册的 onInvalidate 回调会被执行。
   onInvalidate(() => {
