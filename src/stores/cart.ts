@@ -14,6 +14,7 @@ interface CartItem extends Product {
     quantity: number
 }
 
+
 export const useCartStore = defineStore('cart', () => {
     // 2.定义状态
     const products = ref<Product[]>([
