@@ -6,10 +6,15 @@
 
     <div class="body-area">
       <aside class="sidebar-area">
-        <router-view name="SideBar"></router-view>
+        <router-view name="SideBar" v-slot="{ Component }">
+          <transition name="fade" mode="out-in">
+            <component :is="Component" />
+          </transition>
+        </router-view>
       </aside>
 
       <main class="main-area">
+        <!-- default路由 -->
         <router-view v-slot="{ Component }">
           <transition name="fade" mode="out-in">
             <component :is="Component" />

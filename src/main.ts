@@ -7,6 +7,7 @@ import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate' // 引入插件
 import router from './router/LayoutIndex'
 
+
 // 全局组件定义
 import baseButton from './components/baseButton.vue'
 

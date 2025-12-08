@@ -41,7 +41,7 @@
         </li>
       </ul>
 
-      <div class="summary" v-if="cartItems.length > 0">
+      <div class="summary">
         <h3>total items: {{ totalItems }}</h3>
         <h3>
           total price:
@@ -50,6 +50,9 @@
           ></span>
         </h3>
         <button class="clear-btn" @click="clearCart">clear</button>
+        <button class="checkout-btn" @click="goToCheckout">
+          去结算 (Checkout) ➡️
+        </button>
       </div>
     </div>
   </div>
@@ -93,10 +96,14 @@ const detail = (id: number, name: string) => {
     },
   });
 };
+
+// 跳转到结算页面
+const goToCheckout = () => {
+  router.push({ name: "checkout" });
+};
 </script>
 
 <style scoped>
-/* 样式与之前保持一致 */
 .shop-container {
   font-family: sans-serif;
   max-width: 600px;
@@ -138,5 +145,19 @@ const detail = (id: number, name: string) => {
   border: none;
   padding: 8px 15px;
   cursor: pointer;
+}
+
+.checkout-btn {
+  background-color: #52c41a; /* 绿色 */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+.checkout-btn:hover {
+  background-color: #389e0d;
 }
 </style>
